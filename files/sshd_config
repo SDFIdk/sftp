@@ -18,5 +18,12 @@ Subsystem sftp internal-sftp
 ForceCommand internal-sftp
 ChrootDirectory %h
 
+# Disallow any user to log in 
+PasswordAuthentication no
+
+# Only allow certain users to log in
+Match User dar Address 172.17.0.0/16
+    PasswordAuthentication yes
+
 # Enable this for more logs
 LogLevel VERBOSE
