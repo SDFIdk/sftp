@@ -21,5 +21,5 @@ ChrootDirectory %h
 # Enable this for more logs
 LogLevel VERBOSE
 
-# Enable old cipher for netcompany (DAR uploads)
-Ciphers ssh-ed25519,rsa-sha2-512,rsa-sha2-256,ssh-rsa
+# Enable old algorithms for netcompany (DAR uploads)
+HostKeyAlgorithms ssh-ed25519,rsa-sha2-512,rsa-sha2-256,ssh-rsa
