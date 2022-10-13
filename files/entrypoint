@@ -58,6 +58,14 @@ if [ ! -f "$userConfFinalPath" ]; then
         # Import users from final conf file
         while IFS= read -r user || [[ -n "$user" ]]; do
             create-sftp-user "$user"
+
+            # Adds username to allowlist in sshd_config
+            # https://serverfault.com/questions/109768/sshd-restriction-per-user-basis
+            username=$(echo "$user" | awk -F':' '{print $1}')
+            echo "Match User $username" >> /etc/ssh/sshd_config
+            echo "    PasswordAuthentication yes" >> /etc/ssh/sshd_config
+            echo "" >> /etc/ssh/sshd_config
+
         done < "$userConfFinalPath"
     elif $startSshd; then
         log "FATAL: No users provided!"
