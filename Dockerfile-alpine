@@ -1,4 +1,4 @@
-FROM alpine:3.16.2
+FROM alpine:3.17.1
 
 # Steps done in one RUN layer:
 # - Install packages
@@ -6,6 +6,7 @@ FROM alpine:3.16.2
 # - Remove generic host keys, entrypoint generates unique keys
 RUN echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk add --no-cache bash shadow@community openssh openssh-sftp-server && \
+    apk upgrade --no-cache --available && \
     mkdir -p /var/run/sshd && \
     rm -f /etc/ssh/ssh_host_*key*
 
